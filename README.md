@@ -1,8 +1,8 @@
-# Komari Zen
+<img width="1418" height="875" alt="image" src="https://github.com/user-attachments/assets/5c184ecc-d637-40ec-8a4e-f2f490b5a63a" /># Komari Zen VERGE
 
 基于极简主义设计理念的 [Komari Monitor](https://github.com/komari-monitor/komari) 主题。
-
-Gemini Flash 3.5 设计（Google AI Studio），~~Composer 2.5 实现~~，额度用完，GPT 已严肃介入。主题完全由 AI 迭代而成，功能实现尽量遵循 Komari 官方[默认主题](https://github.com/komari-monitor/komari-web)规范；若 UI 相似，纯属审美撞车。
+本源是对上游Komari-theme-zen的Fork，旨在实现自己想要的其他功能
+完全的AIGC（DeepSeek V4 Flash+CODEX）；若 UI 相似，纯属审美撞车。
 
 ## 安装
 
