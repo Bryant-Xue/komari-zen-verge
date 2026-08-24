@@ -1,4 +1,4 @@
-<img width="1418" height="875" alt="image" src="https://github.com/user-attachments/assets/5c184ecc-d637-40ec-8a4e-f2f490b5a63a" /># Komari Zen VERGE
+# Komari Zen VERGE
 
 基于极简主义设计理念的 [Komari Monitor](https://github.com/komari-monitor/komari) 主题。
 本源是对上游Komari-theme-zen的Fork，旨在实现自己想要的其他功能
