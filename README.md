@@ -1,7 +1,9 @@
 # Komari Zen VERGE
 
 基于极简主义设计理念的 [Komari Monitor](https://github.com/komari-monitor/komari) 主题。
+
 本源是对上游Komari-theme-zen的Fork，旨在实现自己想要的其他功能
+
 完全的AIGC（DeepSeek V4 Flash+CODEX）；若 UI 相似，纯属审美撞车。
 
 ## 安装
