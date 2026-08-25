@@ -1,10 +1,10 @@
 {
-  "name": "Komari Zen",
+  "name": "Komari-Zen-Verge",
   "short": "Zen",
   "description": "基于极简主义设计理念的 Komari 主题。",
-  "version": "1.0.0",
-  "author": "qwer-xyz",
-  "url": "https://github.com/qwer-xyz/komari-theme-zen",
+  "version": "1.3.0",
+  "author": "Bryant-Xue",
+  "url": "https://github.com/Bryant-Xue/komari-zen-verge",
   "preview": "preview.png",
   "configuration": {
     "type": "managed",
@@ -169,6 +169,13 @@
         }
       },
       {
+        "name": {
+          "en": "World map",
+          "zh-CN": "世界地图"
+        },
+        "type": "title"
+      },
+      {
         "key": "showNodeMap",
         "type": "switch",
         "name": {
@@ -177,8 +184,22 @@
         },
         "default": true,
         "help": {
-          "en": "Show the dashboard map.",
-          "zh-CN": "显示首页地图。"
+          "en": "Show the world map on the dashboard by default.",
+          "zh-CN": "默认在首页显示世界地图。"
+        }
+      },
+      {
+        "key": "worldMapStyle",
+        "type": "select",
+        "name": {
+          "en": "World map style",
+          "zh-CN": "世界地图样式"
+        },
+        "options": "Zen,Deer",
+        "default": "Zen",
+        "help": {
+          "en": "Zen marker map or Deer-style country status map.",
+          "zh-CN": "Zen 星标地图或 Deer 风格的国家状态地图。"
         }
       },
       {

@@ -1,0 +1,276 @@
+/* Zen-styled region status map. Colors derive from semantic tokens so the
+   light/dark theme and color presets apply automatically. */
+
+.zen-region-map__surface {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--zen-line-strong);
+  border-radius: 0.125rem;
+  background: var(--zen-bg);
+}
+
+.zen-region-map__focus-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  transition: grid-template-columns 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 768px) {
+  .zen-region-map__focus-layout {
+    gap: 1rem;
+  }
+
+  .zen-region-map__focus-layout[data-focused="true"] {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+}
+
+.zen-region-map__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.zen-region-map__ocean {
+  fill: var(--zen-bg);
+}
+
+.zen-region-map__graticule {
+  fill: none;
+  stroke: var(--zen-line);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.zen-region-map__country {
+  fill: var(--zen-fill-muted);
+  fill-opacity: 0.32;
+  stroke: var(--zen-line-strong);
+  stroke-width: 0.75;
+  vector-effect: non-scaling-stroke;
+  transition:
+    fill 180ms ease,
+    fill-opacity 180ms ease,
+    stroke 180ms ease,
+    stroke-width 180ms ease;
+}
+
+.zen-region-map__country.is-active {
+  cursor: pointer;
+}
+
+.zen-region-map__country.status-online {
+  fill: var(--zen-success);
+  fill-opacity: 0.62;
+  stroke: var(--zen-success);
+  stroke-opacity: 0.9;
+}
+
+.zen-region-map__country.status-partial {
+  fill: var(--zen-warning);
+  fill-opacity: 0.56;
+  stroke: var(--zen-warning);
+  stroke-opacity: 0.9;
+}
+
+.zen-region-map__country.status-offline {
+  fill: var(--zen-danger);
+  fill-opacity: 0.36;
+  stroke: var(--zen-danger);
+  stroke-opacity: 0.85;
+}
+
+.zen-region-map__country:hover,
+.zen-region-map__country.is-selected {
+  stroke-width: 1.7;
+}
+
+.zen-region-map__marker {
+  cursor: pointer;
+}
+
+.zen-region-map__marker-halo,
+.zen-region-map__marker-dot {
+  vector-effect: non-scaling-stroke;
+  transition:
+    opacity 180ms ease,
+    stroke-width 180ms ease;
+}
+
+.zen-region-map__marker-halo {
+  fill: var(--zen-surface);
+  stroke-width: 1.4;
+}
+
+.zen-region-map__marker-dot {
+  stroke: var(--zen-surface);
+  stroke-width: 1.2;
+}
+
+.zen-region-map__marker.status-online .zen-region-map__marker-halo {
+  stroke: var(--zen-success);
+}
+
+.zen-region-map__marker.status-online .zen-region-map__marker-dot {
+  fill: var(--zen-success);
+}
+
+.zen-region-map__marker.status-partial .zen-region-map__marker-halo {
+  stroke: var(--zen-warning);
+}
+
+.zen-region-map__marker.status-partial .zen-region-map__marker-dot {
+  fill: var(--zen-warning);
+}
+
+.zen-region-map__marker.status-offline .zen-region-map__marker-halo {
+  stroke: var(--zen-danger);
+}
+
+.zen-region-map__marker.status-offline .zen-region-map__marker-dot {
+  fill: var(--zen-danger);
+}
+
+.zen-region-map__marker:hover .zen-region-map__marker-halo,
+.zen-region-map__marker.is-selected .zen-region-map__marker-halo {
+  stroke-width: 2.2;
+}
+
+.zen-region-map__legend {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .zen-region-map__legend {
+    justify-content: space-between;
+  }
+}
+
+.zen-region-map__legend-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--zen-line-strong);
+  border-radius: 0.125rem;
+  background: var(--zen-surface);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  pointer-events: auto;
+}
+
+.zen-region-map__legend-card--status {
+  align-items: flex-start;
+}
+
+.zen-region-map__legend-card--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  width: min(100%, 22rem);
+}
+
+.zen-region-map__legend-items--stacked {
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.zen-region-map__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--zen-fg-muted);
+}
+
+.zen-region-map__legend-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 9999px;
+}
+
+.zen-region-map__legend-dot.status-online {
+  background: var(--zen-success);
+}
+
+.zen-region-map__legend-dot.status-partial {
+  background: var(--zen-warning);
+}
+
+.zen-region-map__legend-dot.status-offline {
+  background: var(--zen-danger);
+}
+
+.zen-region-map__legend-unmapped-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 9rem;
+  overflow-y: auto;
+}
+
+.zen-region-map__hover-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 70;
+  width: min(20rem, calc(100% - 1rem));
+  max-height: min(28rem, calc(100% - 1rem));
+  overflow: hidden;
+  border: 1px solid var(--zen-line-strong);
+  border-radius: 0.125rem;
+  background: var(--zen-surface);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  transform: translate3d(var(--zen-map-hover-x, 0px), var(--zen-map-hover-y, 0px), 0)
+    translate(12px, 12px);
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.zen-region-map__hover-card[data-horizontal="left"] {
+  transform: translate3d(var(--zen-map-hover-x, 0px), var(--zen-map-hover-y, 0px), 0)
+    translate(calc(-100% - 12px), 12px);
+}
+
+.zen-region-map__hover-card[data-vertical="above"] {
+  transform: translate3d(var(--zen-map-hover-x, 0px), var(--zen-map-hover-y, 0px), 0)
+    translate(12px, calc(-100% - 12px));
+}
+
+.zen-region-map__hover-card[data-horizontal="left"][data-vertical="above"] {
+  transform: translate3d(var(--zen-map-hover-x, 0px), var(--zen-map-hover-y, 0px), 0)
+    translate(calc(-100% - 12px), calc(-100% - 12px));
+}
+
+@media (max-width: 767px) {
+  .zen-region-map__surface {
+    min-height: 0;
+  }
+
+  .zen-region-map__legend {
+    justify-content: center;
+    padding: 0.35rem;
+  }
+
+  .zen-region-map__legend-card {
+    width: auto;
+    justify-content: center;
+  }
+
+  .zen-region-map__legend-card--stacked {
+    justify-content: flex-start;
+  }
+}

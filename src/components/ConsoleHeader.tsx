@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import React, { useMemo, useState, useEffect, useRef, lazy, Suspense } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Settings, Globe } from "lucide-react";
 import { VPSNode } from "../types";
@@ -20,15 +20,8 @@ import { zenType, zenTouch } from "@/lib/typography";
 import { zenBorder, zenText } from "@/lib/zenSemantics";
 import { zenMotion } from "@/lib/zenMotion";
 import { NodeDistributionMapModal } from "@/components/NodeDistributionMapModal";
-import type { NodeDistributionMapNode } from "@/components/NodeDistributionMap";
 import { ResidualValueModal } from "@/components/ResidualValueModal";
 import { useResidualValueSummary } from "@/hooks/useResidualValueSummary";
-
-const NodeDistributionMap = lazy(() =>
-  import("@/components/NodeDistributionMap").then((m) => ({
-    default: m.NodeDistributionMap,
-  })),
-);
 
 const KOMARI_DEFAULT_LOGO_URL = "/favicon.ico";
 
@@ -146,35 +139,6 @@ function HeaderLogo({
       )}`}
     />
   );
-}
-
-function useStableMapNodes(nodes: VPSNode[]): NodeDistributionMapNode[] {
-  const ref = useRef<NodeDistributionMapNode[]>([]);
-
-  return useMemo(() => {
-    const next = nodes.map(({ id, name, flag, online }) => ({
-      id,
-      name,
-      flag,
-      online,
-    }));
-
-    const prev = ref.current;
-    const unchanged =
-      prev.length === next.length &&
-      prev.every((node, index) => {
-        const other = next[index];
-        return (
-          node.id === other.id &&
-          node.name === other.name &&
-          node.flag === other.flag &&
-          node.online === other.online
-        );
-      });
-
-    if (!unchanged) ref.current = next;
-    return ref.current;
-  }, [nodes]);
 }
 
 function MobileMetricHero({
@@ -302,7 +266,6 @@ export function ConsoleHeader({
   const [langOpen, setLangOpen] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
   const [residualOpen, setResidualOpen] = useState(false);
-  const [mapExpanded, setMapExpanded] = useState(false);
   const langMenuRef = useRef<HTMLDivElement>(null);
   const t = translations[lang];
   const tm = mobileCopy(lang);
@@ -315,10 +278,10 @@ export function ConsoleHeader({
     residualValueCurrency,
     dashboardCpuMetric,
     dashboardBandwidthMetric,
+    worldMapStyle,
   } = useThemeSettings();
   const siteName = publicInfo?.sitename || "Komari";
   const siteDescription = publicInfo?.description?.trim();
-  const mapNodes = useStableMapNodes(nodes);
   const residualValue = useResidualValueSummary(
     nodes,
     showResidualValue && view === "dashboard",
@@ -741,47 +704,6 @@ export function ConsoleHeader({
                 )}
               </span>
             </div>
-            {showNodeMap ? (
-              <>
-                <button
-                  type="button"
-                  id="mobile-node-map-toggle"
-                  aria-expanded={mapExpanded}
-                  aria-controls="mobile-node-map-panel"
-                  onClick={() => setMapExpanded((open) => !open)}
-                  className={`flex w-full justify-between gap-3 py-0.5 items-center ${zenTouch.btn} cursor-pointer`}
-                >
-                  <span className={`${textMuted} shrink-0`}>
-                    {t.lblNodeDistribution}:
-                  </span>
-                  <span
-                    className={`flex items-center gap-1.5 font-bold text-right ${textPrimary}`}
-                  >
-                    <span
-                      className={`${zenType.caption} font-normal normal-case ${textMuted}`}
-                    >
-                      {mapExpanded ? t.mapScrollHint : t.mapExpandHint}
-                    </span>
-                    <span className={`${zenType.caption} ${textMuted}`} aria-hidden>
-                      {mapExpanded ? "▴" : "▾"}
-                    </span>
-                  </span>
-                </button>
-                {mapExpanded ? (
-                  <div id="mobile-node-map-panel" className="pt-2 pb-1 -mx-4">
-                    <Suspense fallback={null}>
-                      <NodeDistributionMap
-                        nodes={mapNodes}
-                        theme={theme}
-                        lang={lang}
-                        hideHeader
-                        embedded
-                      />
-                    </Suspense>
-                  </div>
-                ) : null}
-              </>
-            ) : null}
             </div>
           </div>
 
@@ -930,9 +852,10 @@ export function ConsoleHeader({
         <NodeDistributionMapModal
           open={mapOpen}
           onClose={() => setMapOpen(false)}
-          nodes={mapNodes}
+          nodes={nodes}
           theme={theme}
           lang={lang}
+          mapStyle={worldMapStyle}
         />
       ) : null}
       {showResidualValue && view === "dashboard" ? (

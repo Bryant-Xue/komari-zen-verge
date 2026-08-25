@@ -33,6 +33,7 @@ export type ThemeSettings = {
   defaultSortOrder: string;
   showLatency: boolean;
   showNodeMap: boolean;
+  worldMapStyle: WorldMapStyle;
   latencyColorConfig: LatencyColorConfig;
   colorScheme: ColorSchemeSettings;
   fontScheme: FontSchemeSettings;
@@ -41,6 +42,7 @@ export type ThemeSettings = {
 export type LogoShape = "Circle" | "RoundedSquare" | "Square";
 export type DashboardCpuMetric = "Average" | "Max";
 export type DashboardBandwidthMetric = "Total" | "Max";
+export type WorldMapStyle = "Zen" | "Deer";
 
 function parseLogoShape(raw: unknown): LogoShape {
   const shape = parseThemeSelectOption(raw, "RoundedSquare");
@@ -56,6 +58,11 @@ function parseDashboardCpuMetric(raw: unknown): DashboardCpuMetric {
 function parseDashboardBandwidthMetric(raw: unknown): DashboardBandwidthMetric {
   const metric = parseThemeSelectOption(raw, "Total");
   return metric === "Max" ? "Max" : "Total";
+}
+
+function parseWorldMapStyle(raw: unknown): WorldMapStyle {
+  const style = parseThemeSelectOption(raw, "Zen");
+  return style === "Deer" ? "Deer" : "Zen";
 }
 
 export function useThemeSettings(): ThemeSettings {
@@ -88,6 +95,7 @@ export function useThemeSettings(): ThemeSettings {
     defaultSortOrder: parseThemeSelectOption(raw.defaultSortOrder, "Ascending"),
     showLatency: raw.showLatency !== false,
     showNodeMap: raw.showNodeMap !== false,
+    worldMapStyle: parseWorldMapStyle(raw.worldMapStyle),
     latencyColorConfig: latencyColorConfigFromTheme(raw),
     colorScheme: colorSchemeFromTheme(raw),
     fontScheme: fontSchemeFromTheme(raw),

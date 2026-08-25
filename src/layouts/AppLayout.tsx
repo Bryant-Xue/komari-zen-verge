@@ -119,7 +119,7 @@ export function AppLayout() {
               ) : null}
               <span className="mx-2 opacity-40">·</span>
               <a
-                href="https://github.com/qwer-xyz/komari-theme-zen"
+                href="https://github.com/Bryant-Xue/komari-zen-verge"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${zenInteractive.link}`}
@@ -143,12 +143,12 @@ export function AppLayout() {
               ) : null}
               <span className="ml-4 md:ml-6">Theme by</span>{" "}
               <a
-                href="https://github.com/qwer-xyz/komari-theme-zen"
+                href="https://github.com/Bryant-Xue/komari-zen-verge"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${zenInteractive.link}`}
               >
-                Komari Zen
+                Komari Zen Verge
               </a>
               <span className="ml-1 font-normal opacity-70">v{themeVersion}</span>
             </div>

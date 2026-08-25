@@ -13,10 +13,17 @@ import { zenBorder, zenText } from "@/lib/zenSemantics";
 import { useZenPresence, ZEN_MOTION_MODAL_EXIT_MS } from "@/hooks/useZenPresence";
 import { zenModalMotion, zenMotion } from "@/lib/zenMotion";
 import type { NodeDistributionMapNode } from "@/components/NodeDistributionMap";
+import type { WorldMapStyle } from "@/hooks/useThemeSettings";
 
 const NodeDistributionMap = lazy(() =>
   import("@/components/NodeDistributionMap").then((m) => ({
     default: m.NodeDistributionMap,
+  })),
+);
+
+const RegionStatusWorldMap = lazy(() =>
+  import("@/components/RegionStatusWorldMap").then((m) => ({
+    default: m.RegionStatusWorldMap,
   })),
 );
 
@@ -26,6 +33,7 @@ interface NodeDistributionMapModalProps {
   nodes: NodeDistributionMapNode[];
   theme: "light" | "dark";
   lang: Lang;
+  mapStyle?: WorldMapStyle;
 }
 
 export function NodeDistributionMapModal({
@@ -34,6 +42,7 @@ export function NodeDistributionMapModal({
   nodes,
   theme,
   lang,
+  mapStyle = "Zen",
 }: NodeDistributionMapModalProps) {
   const t = translations[lang];
   const { mounted, exiting } = useZenPresence(open, ZEN_MOTION_MODAL_EXIT_MS);
@@ -92,12 +101,21 @@ export function NodeDistributionMapModal({
         </div>
         <div className={`min-h-0 flex-1 overflow-y-auto px-4 py-4 sm:px-5 sm:py-5 lg:px-7 lg:py-6 xl:px-8 xl:py-7 ${zenMotion.fadeInUpDelayed}`}>
           <Suspense fallback={null}>
-            <NodeDistributionMap
-              nodes={nodes}
-              theme={theme}
-              lang={lang}
-              presentation="modal"
-            />
+            {mapStyle === "Deer" ? (
+              <RegionStatusWorldMap
+                nodes={nodes}
+                theme={theme}
+                lang={lang}
+                presentation="modal"
+              />
+            ) : (
+              <NodeDistributionMap
+                nodes={nodes}
+                theme={theme}
+                lang={lang}
+                presentation="modal"
+              />
+            )}
           </Suspense>
         </div>
       </div>
