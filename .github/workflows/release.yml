@@ -33,5 +33,5 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: zen-theme-v*.zip
+          files: releases/zen-theme-v*.zip
           generate_release_notes: true
