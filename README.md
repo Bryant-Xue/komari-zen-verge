@@ -2,9 +2,9 @@
 
 基于极简主义设计理念的 [Komari Monitor](https://github.com/komari-monitor/komari) 主题，Fork 自 [qwer-xyz/komari-theme-zen](https://github.com/qwer-xyz/komari-theme-zen)。
 
-在保留 Zen 的克制、留白与秩序感的前提下，把日常运维真正会看的信息补齐：世界地图、延迟探针、到期与剩余价值、多语言、可换肤。
+在保留 Zen 的克制、留白与秩序感的前提下，添加来自deer主题的很fancy的世界地图并完善更fancy的地图交互功能
 
-Gemini Flash 3.5 设计（Google AI Studio），~~Composer 2.5 实现~~，额度用完，GPT 已严肃介入。主题完全由 AI 迭代而成，功能实现尽量遵循 Komari 官方[默认主题](https://github.com/komari-monitor/komari-web)规范；若 UI 相似，纯属审美撞车。
+由DeepSeek 4.1f开发完成，整个项目基本只有这一点README是我自己写的233333
 
 ![预览](./preview.png)
 
