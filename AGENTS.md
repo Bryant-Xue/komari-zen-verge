@@ -4,13 +4,16 @@
 
 ## Naming
 
-Write **Komari Zen** for the theme name in prose. Use the literal package or
-manifest names only when referring to code, files, commands, or artifacts:
+Write **Komari Zen Verge** for the theme name in prose; **Zen Verge** is fine
+after the first mention. Use the literal package or manifest names only when
+referring to code, files, commands, or artifacts:
 
-- Package name: `komari-theme-zen`
-- Theme short name: `Zen`
+- Package name: `komari-zen-verge`
+- Theme manifest name: `Komari-Zen-Verge`
+- Theme short name: `Zen` (Komari shows this in compact UI)
 - Theme manifest: `komari-theme.json`
 - Release artifact: `zen-theme-v*.zip`
+- Upstream theme: [qwer-xyz/komari-theme-zen](https://github.com/qwer-xyz/komari-theme-zen)
 - Upstream monitor product: **Komari Monitor** or **Komari**
 
 Use **node** for monitored servers in UI copy unless existing translations use
@@ -100,7 +103,7 @@ Key paths:
 
 ## UI Design Standards
 
-Komari Zen is a theme project. UI quality is the primary product surface.
+Komari Zen Verge is a theme project. UI quality is the primary product surface.
 
 - Preserve the existing Zen visual language: minimalist, data-dense, quiet,
   technical, and readable. Avoid marketing-page patterns, oversized decorative
